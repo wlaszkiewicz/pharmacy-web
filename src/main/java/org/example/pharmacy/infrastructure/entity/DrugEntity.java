@@ -15,6 +15,10 @@ public class DrugEntity {
     private String ma;
 
     @Basic
+    @Column(name = "price")
+    private double price;
+
+    @Basic
     @Column(name = "brandName")
     private String brandName;
 
@@ -93,6 +97,13 @@ public class DrugEntity {
 
     public void setMa(String ma) {
         this.ma = ma;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getBrandName() {

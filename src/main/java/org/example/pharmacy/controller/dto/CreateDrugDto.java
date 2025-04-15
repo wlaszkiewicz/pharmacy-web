@@ -1,29 +1,84 @@
 package org.example.pharmacy.controller.dto;
 
+import jakarta.validation.constraints.*;
+
 public class CreateDrugDto {
+    @NotBlank(message = "MA cannot be blank")
+    @Pattern(regexp = "[A-Z]{2}\\d{6}", message = "MA number must be in format AA123456")
     private String ma;
+
+    @Max(value = 10000, message = "Price cannot exceed 10000")
+    @Digits(integer = 5, fraction = 2, message = "Price must be a valid number with up to 2 decimal places")
+    @DecimalMin(value = "0.01", message = "Price must be at least 0.01")
+    private double price;
+
+    @NotBlank(message = "Brand name cannot be blank")
+    @Size(max = 50, message = "Brand name cannot exceed 50 characters")
     private String brandName;
+
+    @NotBlank(message = "Manufacturer cannot be blank")
+    @Size(max = 50, message = "Manufacturer cannot exceed 50 characters")
     private String manufacturer;
+
+    @NotBlank(message = "Active ingredient cannot be blank")
+    @Size(max = 100, message = "Active ingredient cannot exceed 100 characters")
     private String activeIngredient;
+
+    @NotBlank(message = "NDC cannot be blank")
+    @Pattern(regexp = "\\d{4}-\\d{4}-\\d{2}", message = "NDC must be in format 1234-5678-90")
     private String ndc;
+
+    @NotBlank(message = "ATC code cannot be blank")
+    @Pattern(regexp = "[A-Z]{1}\\d{2}[A-Z]{2}\\d{2}", message = "ATC code must follow the format A00AA00")
     private String atcCode;
+
+    @NotBlank(message = "Drug form cannot be blank")
+    @Size(max = 30, message = "Drug form cannot exceed 30 characters")
     private String drugForm;
+
+    @NotBlank(message = "Route of administration cannot be blank")
+    @Size(max = 30, message = "Route of administration cannot exceed 30 characters")
     private String routeOfAdministration;
+
+    @NotBlank(message = "Prescription status cannot be blank")
+    @Pattern(regexp = "OTC|Rx-only", message = "Prescription status must be either 'OTC' or 'Rx-only'")
     private String prescriptionStatus;
+
+    @NotBlank(message = "Controlled substance status cannot be blank")
+    @Pattern(regexp = "C-[IV]{1,3}", message = "Controlled substance status must follow the format C-I, C-II, etc.")
     private String controlledSubstanceStatus;
-    private String contraindications;
-    private String sideEffects;
+
+    @Size(max = 100, message = "Contraindications cannot exceed 100 characters")
+    private String contraindications = "There's no known contraindications";
+
+    @Size(max = 100, message = "Side effects cannot exceed 100 characters")
+    private String sideEffects = "There's no known side effects";
+
+    @NotBlank(message = "Dosage cannot be blank")
+    @Size(max = 50, message = "Dosage cannot exceed 50 characters")
     private String dosage;
+
+    @NotBlank(message = "Batch number cannot be blank")
+    @Size(max = 20, message = "Batch number cannot exceed 20 characters")
     private String batchNumber;
+
+    @NotBlank(message = "Expiration date cannot be blank")
+    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Expiration date must follow the format yyyy-MM-dd")
+//    @Future(message = "The expiration date has passed, you cannot add this drug")
     private String expirationDate;
-    private String storageConditions;
+
+    @Size(max = 100, message = "Storage conditions cannot exceed 100 characters")
+    private String storageConditions = "There's no specific storage conditions";
+
+    @Min(value = 1, message = "Available copies must be a positive integer")
     private int availableCopies;
 
     public CreateDrugDto() {
     }
 
-    public CreateDrugDto(String ma, String brandName, String manufacturer, String activeIngredient, String ndc, String atcCode, String drugForm, String routeOfAdministration, String prescriptionStatus, String controlledSubstanceStatus, String contraindications, String sideEffects, String dosage, String batchNumber, String expirationDate, String storageConditions, int availableCopies) {
+    public CreateDrugDto(String ma, String brandName, Double price, String manufacturer, String activeIngredient, String ndc, String atcCode, String drugForm, String routeOfAdministration, String prescriptionStatus, String controlledSubstanceStatus, String contraindications, String sideEffects, String dosage, String batchNumber, String expirationDate, String storageConditions, int availableCopies) {
         this.ma = ma;
+        this.price = price;
         this.brandName = brandName;
         this.manufacturer = manufacturer;
         this.activeIngredient = activeIngredient;
@@ -48,6 +103,14 @@ public class CreateDrugDto {
 
     public void setMa(String ma) {
         this.ma = ma;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getBrandName() {

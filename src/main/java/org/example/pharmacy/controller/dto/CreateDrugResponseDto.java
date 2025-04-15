@@ -3,6 +3,7 @@ package org.example.pharmacy.controller.dto;
 public class CreateDrugResponseDto {
     private long id;
     private String ma;
+    private double price;
     private String brandName;
     private String manufacturer;
     private String activeIngredient;
@@ -23,9 +24,10 @@ public class CreateDrugResponseDto {
     public CreateDrugResponseDto() {
     }
 
-    public CreateDrugResponseDto(long id, String ma, String brandName, String manufacturer, String activeIngredient, String ndc, String atcCode, String drugForm, String routeOfAdministration, String prescriptionStatus, String controlledSubstanceStatus, String contraindications, String sideEffects, String dosage, String batchNumber, String expirationDate, String storageConditions, int availableCopies) {
+    public CreateDrugResponseDto(long id, String ma, Double Price, String brandName, String manufacturer, String activeIngredient, String ndc, String atcCode, String drugForm, String routeOfAdministration, String prescriptionStatus, String controlledSubstanceStatus, String contraindications, String sideEffects, String dosage, String batchNumber, String expirationDate, String storageConditions, int availableCopies) {
         this.id = id;
         this.ma = ma;
+        this.price = Price;
         this.brandName = brandName;
         this.manufacturer = manufacturer;
         this.activeIngredient = activeIngredient;
@@ -58,6 +60,13 @@ public class CreateDrugResponseDto {
 
     public void setMa(String ma) {
         this.ma = ma;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getBrandName() {
